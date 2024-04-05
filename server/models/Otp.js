@@ -41,7 +41,7 @@ async function sendVerificationEmail(email, otp) {
 		throw error;
 	}
 }
-// // document save hone se phle ek verificiation mail jayega ,uske verify baad aage jayenge aur db me store hoga
+// // document save hone se phle ek verificiation mail jayega ,uske verify(user ka otp req.body se aur db me store otp same hone ke) baad aage jayenge aur db me store hoga user ka details
 // //defining a post save hook to send email after the document has been saved
 OTPSchema.pre("save", async function (next) {
 	console.log("New document saved to database");
