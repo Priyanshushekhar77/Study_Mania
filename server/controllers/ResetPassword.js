@@ -72,7 +72,7 @@ exports.resetPassword = async(req,res) => {
                 message:"token is invalid"
             });
         }
-        if(userDetails.resetPasswordExpires > Date.now()){
+        if (!(userDetails.resetPasswordExpires > Date.now())){
             return res.status(403).json({
                 success:false,
                 message:"token is expired,regenerate it"

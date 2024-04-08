@@ -8,6 +8,7 @@ exports.auth = async(req,res,next) => {
     //extract token 3 methods -< token given in user db during login
     const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer","");
     console.log("After token extraction");
+    //IF TOKEN MISSING
     if(!token){
         return res.status(401).json({
             success:false,
@@ -26,7 +27,6 @@ exports.auth = async(req,res,next) => {
         return res.status(401).json({
             success:false,
             message:"token is invalid",
-            error:error.message,
         });
     }
     next();

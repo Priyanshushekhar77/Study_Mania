@@ -179,7 +179,7 @@ exports.login = async(req,res) => {
             expires:new Date(Date.now() + 2 * 24 *60 *60 * 1000),
             httpOnly:true,
         };
-        //send token in response with cookie
+        //SET COOKIE FOR TOKEN send token in response with cookie
         res.cookie("token",token,options).status(200).json({
             success:true,
             token,
@@ -208,8 +208,10 @@ exports.changePassword = async(req,res) => {
    try{
      //get user data from req body
      const userDetails = await User.findById(req.user.id);//get userdetails by req.user.id
+     
+		// Get old password, new password, and confirm new password from req.body
      const{oldPassword, newPassword, confirmNewPassword}=req.body;
-     //validation
+     // Validate old password
      const passwordMatch=await bcrypt.compare(oldPassword,userDetails.password);
      if(!passwordMatch){
          return res.status(401).json({
@@ -217,6 +219,7 @@ exports.changePassword = async(req,res) => {
              message:"password is incorrect"
          });
      }
+     // Match new password and confirm new password
      if(newPassword !== confirmNewPassword){
          return res.status(400).json({
              success:false,

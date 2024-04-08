@@ -80,13 +80,13 @@ exports.createCourse = async(req,res) => {
         instructor:instructorDetails._id,
         whatYouWillLearn:whatYouWillLearn,
         price,
-        tag,
+        tag:tag,
         category:categoryDetails._id,
         thumbnail:thumbnailImage.secure_url,
         status:status,
-        instructions,
+        instructions:instructions,
       })
-      // add this nre course to user schema of the instructor
+      // add this new course to user schema of the instructor
       const userUpdated = await User.findByIdAndUpdate({
         _id:instructorDetails._id
       },
@@ -184,6 +184,7 @@ exports.getCourseDetails = async(req,res) => {
         error:error.message,
     })
      }
+     //todo for last
      let totalDurationInSeconds = 0
      courseDetails.courseContent.forEach((content) => {
       content.SubSection.forEach((SubSection) => {
@@ -209,6 +210,7 @@ exports.getCourseDetails = async(req,res) => {
   })
   }
 }
+//1.todo for last
 //get full course details 
 exports.getFullCourseDetails = async(req,res) => {
   try{
@@ -270,6 +272,7 @@ exports.getFullCourseDetails = async(req,res) => {
   })
   }
 }
+//2.todo for lasts
 // get a list of all courses for a particular given instructor
 exports.getInstructorCourses = async(req,res) => {
   try{
@@ -295,6 +298,7 @@ exports.getInstructorCourses = async(req,res) => {
   })
   }
 }
+//3.todo for lasts
 //edit course details controller
 exports.editCourse = async(req,res) => {
   try{
@@ -363,6 +367,7 @@ exports.editCourse = async(req,res) => {
   })
   }
 }
+//4.todo for lasts
 //delete the course
 exports.deleteCourse = async(req,res) => {
   try{
