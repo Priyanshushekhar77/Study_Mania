@@ -98,7 +98,6 @@ exports.deleteSection = async(req,res)=> {
         }
         //delete sub section
         await SubSection.deleteMany({_id:{$in:section.subSection}});
-
         //delete section
         await Section.findByIdAndDelete(sectionId);
         //find the updated course and return
