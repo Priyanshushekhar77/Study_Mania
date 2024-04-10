@@ -1,3 +1,4 @@
+const Course = require("../models/Course");
 const Profile=require("../models/Profile")
 const User=require("../models/User")
 const {uploadImageToCloudinary} = require("../utils/imageUploader")
@@ -137,3 +138,29 @@ exports.getEnrolledCourses = async(req,res)=> {
     }
 };
 
+
+//letter
+exports.instructorDashboard = async(req,res) => {
+    try{
+        const courseDetails = await Course.find({instructor:re.user.id})
+        const courseData = courseDetails.map((course) => {
+            const totalStudentsEnrolled = course.studentEnrolled.length
+            const totalAmountGenerated = totalStudentsEnrolled * course.price
+              // Create a new object with the additional fields
+      const courseDataWithStats = {
+        _id: course._id,
+        courseName: course.courseName,
+        courseDescription: course.courseDescription,
+        // Include other course properties as needed
+        totalStudentsEnrolled,
+        totalAmountGenerated,
+      }
+      return courseDataWithStats
+        })
+    
+    res.status(200).json({ courses: courseData })
+}catch (error) {
+    console.error(error)
+    res.status(500).json({ message: "Server Error" })
+}
+}

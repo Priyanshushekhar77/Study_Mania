@@ -58,7 +58,7 @@ exports.createRating = async(req,res) => {
     }
 }
 //get average rating
-const getAverageRating = async(req,res) => {
+exports.getAverageRating = async(req,res) => {
     try{
         const courseId=req.body.courseId;
         //cal avg rating

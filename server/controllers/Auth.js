@@ -253,7 +253,7 @@ exports.changePassword = async(req,res) => {
      }
      return res.status(200).json({
          success:true,
-         message;"Password updated successfully",
+         message:"Password updated successfully",
      })
    }
 

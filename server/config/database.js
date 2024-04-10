@@ -5,10 +5,10 @@ exports.connect = () => {
         useNewUrlParser: true,
         useUnifiedTopology:true,
     })
-    .then(() => console.log("DATABASE CONNECTED"))
+    .then(() => console.log("DATABASE CONNECTED SUCCESSFULLY"))
     .catch((error) => {
         console.log("connection failed");
         console.log(error);
         process.exit(1);
-    });
+    })
 };
