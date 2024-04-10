@@ -64,10 +64,6 @@ instructions:{
 status:{
     type:String,
     enum:["Draft","Published"],
-},
-createdAt:{
-    type:Date,
-    dafault:Date.now(),
 }
 },
 {timestamps: true}

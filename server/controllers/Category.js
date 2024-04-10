@@ -97,7 +97,7 @@ exports.categoryPageDetails = async(req,res) => {
                                             return res.status(200).json({
                                                 success:true,
                                                 data:{
-                                                    selectedCategory,
+                                                selectedCategory,
                                                 differentCategory,
                                                 mostSellingCourses,
                                                 }

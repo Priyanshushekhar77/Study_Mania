@@ -52,7 +52,7 @@ exports.createSection = async(req,res) => {
 exports.updateSection = async(req,res) => {
     try{
         const{sectionName,sectionId,courseId} = req.body;
-        const section = await Section.findByIdAndDelete(
+        const section = await Section.findByIdAndUpdate(
             sectionId,
             {sectionName},
             {new:true}
@@ -81,7 +81,9 @@ exports.updateSection = async(req,res) => {
 //delete a section
 exports.deleteSection = async(req,res)=> {
     try{
+        //HW -> req.params -> test
         const {sectionId,courseId} = req.body;
+        //Course ko bhi update karo
         await Course.findByIdAndUpdate(courseId,{
             $pull:{
                 courseContent:sectionId

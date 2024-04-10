@@ -89,23 +89,22 @@ exports.signup=async(req,res) => {
             });
         }
         //find the most recent otp for the email in db
-        const getotp=await OTP.findOne({email}).sort({createdAt:-1}).limit(1);//sort in dec order and get one particular val
-        console.log(getotp);
-        //otp validation
-        if(getotp.length===0){
-            //otp not found for the email
-            return res.status(400).json({
-                success:false,
-                message:"otp not found for the email"
-            });
-        }
-        else if(otp!==getotp[0].otp){
-            //invalid otp
-            return res.status(400).json({
-                success:false,
-                message:"otp is not valid"
-            });
-        }
+        //sort in dec order and get one particular val
+        const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+		console.log(response);
+		if (response.length === 0) {
+			// OTP not found for the email
+			return res.status(400).json({
+				success: false,
+				message: "The OTP is not valid",
+			});
+		} else if (otp !== response[0].otp) {
+			// Invalid OTP
+			return res.status(400).json({
+				success: false,
+				message: "The OTP is not valid",
+			});
+		}
         //hash password
         const hashedPassword=await bcrypt.hash(password,10);
         ////approval
@@ -132,6 +131,7 @@ exports.signup=async(req,res) => {
         });
         return res.status(200).json({
             success:true,
+            user,
             message:"user registered successfully"
         });
     }

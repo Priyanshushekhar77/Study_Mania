@@ -4,7 +4,7 @@ const User=require("../models/User")
 const {uploadImageToCloudinary} = require("../utils/imageUploader")
 exports.updateProfile = async(req,res)=> {
     try{
-        const{dateOfBirth="",about="",contactNumber}=req.body;
+        const{dateOfBirth="",about="",contactNumber,gender}=req.body;
         const id=req.user.id;
         //find the profile by id
         const userDetails=await User.findById(id);
@@ -12,6 +12,7 @@ exports.updateProfile = async(req,res)=> {
         //upfate the profile fields
         profile.dateOfBirth=dateOfBirth;
         profile.about=about;
+        profile.gender=gender;
         profile.contactNumber=contactNumber;
         //saved the updated profile
         await profile.save();
@@ -142,7 +143,7 @@ exports.getEnrolledCourses = async(req,res)=> {
 //letter
 exports.instructorDashboard = async(req,res) => {
     try{
-        const courseDetails = await Course.find({instructor:re.user.id})
+        const courseDetails = await Course.find({instructor:req.user.id})
         const courseData = courseDetails.map((course) => {
             const totalStudentsEnrolled = course.studentEnrolled.length
             const totalAmountGenerated = totalStudentsEnrolled * course.price

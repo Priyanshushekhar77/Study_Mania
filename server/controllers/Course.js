@@ -18,16 +18,16 @@ exports.createCourse = async(req,res) => {
             courseDescription,
             whatYouWillLearn,
             price,
-            tag:_tag,//string array
+            tag,//string array
             category,
             status,
-            instructions:_instructions,
+            instructions
         }=req.body
       //get thumbnail image from req.files
       const thumbnail=req.files.thumbnailImage
       // convert the tag and instructions from stringified array to array
-      const tag=JSON.parse(_tag);
-      const instructions=JSON.parse(_instructions)
+      // const tag=JSON.parse(_tag);
+      // const instructions=JSON.parse(_instructions)
       console.log("tag:" ,tag)
       console.log("instructions:" ,instructions)
       //validation 
@@ -168,12 +168,12 @@ exports.getCourseDetails = async(req,res) => {
        },
     })
     .populate("category")
-    .populate("ratingAndReviews")
+    // .populate("ratingAndReviews") currently not present
      .populate({
       path:"courseContent",
       populate:{
         path:"subSection",
-        select:"videoUrl",
+        // select:"videoUrl",
       },
      })
      .exec()
@@ -184,24 +184,33 @@ exports.getCourseDetails = async(req,res) => {
         error:error.message,
     })
      }
-     //todo for last
-     let totalDurationInSeconds = 0
-     courseDetails.courseContent.forEach((content) => {
-      content.SubSection.forEach((SubSection) => {
-        const timeDurationInSeconds = parseInt(SubSection.timeDuration)
-        totalDurationInSeconds+=totalDurationInSeconds
-      })
-     })
-     const totalDuration = convertSecToDuration(totalDurationInSeconds)
-     return res.status(200).json({
-      success:true,
-      message:"course details fetched completely",
-      data:{
-        courseDetails,
-        totalDuration,
-      },
-  })
-  }
+
+       //return response
+       return res.status(200).json({
+        success:true,
+        message:"Course Details fetched successfully",
+        data:courseDetails,
+    })
+
+}
+  //    //todo for last
+  //    let totalDurationInSeconds = 0
+  //    courseDetails.courseContent.forEach((content) => {
+  //     content.SubSection.forEach((SubSection) => {
+  //       const timeDurationInSeconds = parseInt(SubSection.timeDuration)
+  //       totalDurationInSeconds+=totalDurationInSeconds
+  //     })
+  //    })
+  //    const totalDuration = convertSecToDuration(totalDurationInSeconds)
+  //    return res.status(200).json({
+  //     success:true,
+  //     message:"course details fetched completely",
+  //     data:{
+  //       courseDetails,
+  //       totalDuration,
+  //     },
+  // })
+  
   catch(error){
     return res.status(500).json({
       success:false,
