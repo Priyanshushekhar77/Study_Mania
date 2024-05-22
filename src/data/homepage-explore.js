@@ -1,6 +1,6 @@
 export const HomePageExplore = [
     {
-        tag: 'Free',
+        tag: 'Demo',
         courses : [
             {
                 heading : "Learn HTML",
@@ -23,7 +23,7 @@ export const HomePageExplore = [
         ]
     },
     {
-        tag: 'New to coding',
+        tag: 'Basic',
         courses : [
             {
                 heading : "HTML",
