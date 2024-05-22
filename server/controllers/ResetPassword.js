@@ -31,12 +31,12 @@ exports.resetPasswordToken = async(req,res) => {
         //send mail to email with url of reset paswd
         await mailSender(
             email,
-            "Passwor dreset link",
-            `link for email verification is ${url}. Please Click On this url to reset your password`
+            "Password reset link",
+            `link for email verification is ${url}. Please Click On this link to reset your password`
         );
         return res.json({
             success:true,
-            message:"email sent successfully ,please check ur email for further process ",
+            message:"email sent successfully ,please check your email for further process ",
         });
     }
     catch(error){
