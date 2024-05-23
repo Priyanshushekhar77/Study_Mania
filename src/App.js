@@ -10,6 +10,7 @@ import { Route, Routes, useNavigate } from "react-router-dom"
 import  Navbar  from "./components/Common/Navbar";
 import ForgotPassword from "./pages/ForgotPassword";
 import OpenRoute from "./components/core/Auth/OpenRoute"
+import PrivateRoute from "./components/core/Auth/PrivateRoute"
 
 
 //PAGES
@@ -20,6 +21,9 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About"
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
+import Error from "./pages/Dashboard";
+import MyProfile from "./components/core/Dashboard/MyProfile"
 
 
 function App() {
@@ -31,6 +35,8 @@ function App() {
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+
+    
 
       <Route
           path="signup"
@@ -75,7 +81,24 @@ function App() {
             </OpenRoute>
           }
         />
+
+
+         {/* Private Route - for Only Logged in User */}
+         <Route
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          {/* Route for all users */}
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+          {/* <Route path="dashboard/Settings" element={<Settings />} /> */}
+          </Route>
         
+
+         {/* 404 Page */}
+         <Route path="*" element={<Error />} />
     </Routes>
    </div>
   );
