@@ -1,13 +1,27 @@
-import "./App.css";
-import { Route,Routes } from "react-router-dom";
-import  {Home } from "./pages/Home";
+import { useEffect } from "react"
+import "./App.css"
+// Redux
+import { useDispatch, useSelector } from "react-redux"
+// React Router
+import { Route, Routes, useNavigate } from "react-router-dom"
+
+//COMPONENTS
+
 import  Navbar  from "./components/Common/Navbar";
 import ForgotPassword from "./pages/ForgotPassword";
-import UpdatePassword from "./pages/UpdatePassword";
-import VerifyEmail from "./pages/VerifyEmail";
 import OpenRoute from "./components/core/Auth/OpenRoute"
+
+
+//PAGES
+import  {Home } from "./pages/Home";
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
+import UpdatePassword from "./pages/UpdatePassword";
+import VerifyEmail from "./pages/VerifyEmail";
+import About from "./pages/About"
+import Contact from "./pages/Contact";
+
+
 function App() {
   return (
     
@@ -15,6 +29,8 @@ function App() {
    <Navbar/>
     <Routes>
       <Route path="/" element={<Home/>} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
 
       <Route
           path="signup"
