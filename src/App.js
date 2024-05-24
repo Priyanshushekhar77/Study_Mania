@@ -23,11 +23,23 @@ import About from "./pages/About"
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Error from "./pages/Dashboard";
+//protected routes
 import MyProfile from "./components/core/Dashboard/MyProfile"
+import Settings from "./components/core/Dashboard/Settings"
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
+import Cart from "./components/core/Dashboard/Cart";
+import { ACCOUNT_TYPE } from "./utils/constants";
 
 
 function App() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const { user } = useSelector((state) => state.profile)
   return (
+
+    
     
    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
    <Navbar/>
@@ -93,13 +105,27 @@ function App() {
         >
           {/* Route for all users */}
           <Route path="dashboard/my-profile" element={<MyProfile />} />
-          {/* <Route path="dashboard/Settings" element={<Settings />} /> */}
-          </Route>
-        
+      <Route path="dashboard/Settings" element={<Settings />} />
 
-         {/* 404 Page */}
-         <Route path="*" element={<Error />} />
+      {
+        user?.accountType === ACCOUNT_TYPE.STUDENT && (
+          <>
+          <Route path="dashboard/cart" element={<Cart />} />
+          <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+          </>
+        )
+      }
+
+
+    </Route>
+
+    
+
+    <Route path="*" element={<Error />} />
+
+
     </Routes>
+
    </div>
   );
 }
