@@ -7,10 +7,10 @@ const router = express.Router()
     createCourse,
     getAllCourses,
     getCourseDetails,
-    // getFullCourseDetails,
-    // editCourse,
-    // getInstructorCourses,
-    // deleteCourse,
+    getFullCourseDetails,
+    editCourse,
+    getInstructorCourses,
+    deleteCourse,
   } = require("../controllers/Course")
 
   //categories controller importing
@@ -52,19 +52,20 @@ const {
   //1/course can only created by the instructor
   router.post("/createCourse",auth,isInstructor,createCourse)
   //edit course route
-  // router.post("/editCourse",auth,isInstructor,editCourse)
-  //delete courses
-  // router.delete("/deleteCourse",auth,isInstructor,deleteCourse)
-  //2.SECTIONS
+  router.post("/editCourse",auth,isInstructor,editCourse)
+  // delete courses
+  router.delete("/deleteCourse",auth,isInstructor,deleteCourse)
+  // 2.SECTIONS
   //add a section to the course
-  router.post("/createSection",auth,isInstructor,createSection)
+  router.post("/addSection",auth,isInstructor,createSection)
   //update a section
   router.post("/updateSection",auth,isInstructor,updateSection)
   //delete a section
   router.post("/deleteSection",auth,isInstructor,deleteSection)
 //3.SUBSECTIONS
+
 // Add a Sub Section to a Section
-router.post("/createSubSection", auth, isInstructor, createSubSection)
+router.post("/addSubSection", auth, isInstructor, createSubSection)
 // Edit Sub Section
 router.post("/updateSubSection", auth, isInstructor, updateSubSection)
 // Delete Sub Section
@@ -73,19 +74,23 @@ router.post("/deleteSubSection", auth, isInstructor, deleteSubSection)
 
 //letter
 //get all courses under a specific Instructor
-// router.get("/getInstructorCourses",auth,isInstructor,getInstructorCourses)
+router.get("/getInstructorCourses",auth,isInstructor,getInstructorCourses)
 // //get all registered courses
 router.get("/getAllCourses",getAllCourses)
 // // Get Details for a Specific Courses
 router.post("/getCourseDetails", getCourseDetails)
 // Get Details for a Specific Courses
 //later
-// router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+router.post("/getFullCourseDetails", auth, getFullCourseDetails)
 
 
 //to update a course progress under a student
 //letter
-// router.post("/updateCourseProgress",auth,isStudent,updateCourseProgress)
+router.post("/updateCourseProgress",auth,isStudent,updateCourseProgress)
+
+
+// To get Course Progress
+// router.post("/getProgressPercentage", auth, isStudent, getProgressPercentage)
 
 //for admins
 router.post("/createCategory", auth, isAdmin, createCategory)
@@ -99,3 +104,4 @@ router.get("/getReviews",getAllRating)
 
 
 module.exports=router;
+
