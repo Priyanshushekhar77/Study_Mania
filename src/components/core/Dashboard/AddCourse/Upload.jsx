@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 
 import "video-react/dist/video-react.css"
 import { Player } from "video-react"
+import { all } from "axios"
 
 export default function Upload({
   name,
@@ -32,9 +33,10 @@ export default function Upload({
   }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: !video
-      ? { "image/*": [".jpeg", ".jpg", ".png"] }
-      : { "video/*": [".mp4"] },
+    accept: all
+      // ? { "image/*": [".jpg", ".jpg", ".png"] }
+      // : { "video/*": [".mp4"] },
+      ,
     onDrop,
   })
 

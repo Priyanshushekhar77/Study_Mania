@@ -16,9 +16,10 @@ import MyProfile from "./components/core/Dashboard/MyProfile"
 import Settings from "./components/core/Dashboard/Settings"
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import Cart from "./components/core/Dashboard/Cart";
+//instructors ka kaam hai
 import MyCourses from "./components/core/Dashboard/MyCourses"
 import AddCourse from "./components/core/Dashboard/AddCourse"
-// import EditCourse from "./components/core/Dashboard/EditCourse"
+import EditCourse from "./components/core/Dashboard/EditCourse"
 // import Instructor from "./components/core/Dashboard/Instructor"
 //PAGES
 import  {Home } from "./pages/Home";
@@ -128,10 +129,10 @@ function App() {
               {/* <Route path="dashboard/instructor" element={<Instructor />} /> */}
               <Route path="dashboard/my-courses" element={<MyCourses />} />
               <Route path="dashboard/add-course" element={<AddCourse />} />
-              {/* <Route
+              <Route
                 path="dashboard/edit-course/:courseId"
                 element={<EditCourse />}
-              /> */}
+              />
             </>
           )}
 

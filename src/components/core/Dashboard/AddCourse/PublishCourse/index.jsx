@@ -44,6 +44,7 @@ export default function PublishCourse() {
       goToCourses()
       return
     }
+    
     const formData = new FormData()
     formData.append("courseId", course._id)
     const courseStatus = getValues("public")
