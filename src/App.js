@@ -30,6 +30,8 @@ import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About"
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
+// import CourseDetails from "./pages/CourseDetails"
+import Catalog from "./pages/Catalog"
 import Error from "./pages/Dashboard";
 //protected routes
 
@@ -53,8 +55,11 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
 
-    
+      {/* <Route path="courses/:courseId" element={<CourseDetails />} /> */}
+        <Route path="catalog/:catalogName" element={<Catalog />} />
 
+    
+  {/* Open Route - for Only Non Logged in User */}
       <Route
           path="signup"
           element={
