@@ -16,7 +16,7 @@ const userRoutes = require("./routes/user");
 const profileRoutes = require("./routes/profile");
 const courseRoutes = require("./routes/Course");
 //letter payment system will be done
-// const paymentRoutes = require("./routes/Payments");
+const paymentRoutes = require("./routes/Payments");
 const contactUsRoute = require("./routes/Contact");
 
 // Setting up port number
@@ -52,7 +52,7 @@ app.use("/api/v1/reach",contactUsRoute)
 app.use("/api/v1/course",courseRoutes)
 
 //later payment system will be handled
-// app.use("/api/v1/payment",paymentRoutes)
+app.use("/api/v1/payment",paymentRoutes)
 
 //testing the server
 app.get("/", (req,res) => {
