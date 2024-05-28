@@ -10,6 +10,19 @@ import { markLectureAsComplete } from "../../../services/operations/courseDetail
 import { updateCompletedLectures } from "../../../slices/viewCourseSlice"
 import IconBtn from "../../Common/IconBtn"
 
+//for pdf using 
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+
+
+import { Worker, Viewer } from "@react-pdf-viewer/core";
+
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import { pageNavigationPlugin } from '@react-pdf-viewer/page-navigation';
+import { zoomPlugin } from '@react-pdf-viewer/zoom';
+import { toolbarPlugin } from '@react-pdf-viewer/toolbar';
+
+
 const VideoDetails = () => {
   const { courseId, sectionId, subSectionId } = useParams()
   const navigate = useNavigate()
@@ -24,6 +37,8 @@ const VideoDetails = () => {
   const [previewSource, setPreviewSource] = useState("")
   const [videoEnded, setVideoEnded] = useState(false)
   const [loading, setLoading] = useState(false)
+//pdf
+const [isPdf, setIsPdf] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -43,6 +58,12 @@ const VideoDetails = () => {
         setVideoData(filteredVideoData[0])
         setPreviewSource(courseEntireData.thumbnail)
         setVideoEnded(false)
+        //pdf
+        if (filteredVideoData.contentType === "pdf") {
+          setIsPdf(true)
+        } else {
+          setIsPdf(false)
+        }
       }
     })()
   }, [courseSectionData, courseEntireData, location.pathname])
@@ -167,33 +188,42 @@ const VideoDetails = () => {
     }
     setLoading(false)
   }
+//pdf 
+const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-  return (
-    <div className="flex flex-col gap-5 text-white">
-      {!videoData ? (
-        <img
-          src={previewSource}
-          alt="Preview"
-          className="h-full w-full rounded-md object-cover"
-        />
-      ) : (
-        <Player
-          ref={playerRef}
-          aspectRatio="16:9"
-          playsInline
-          onEnded={() => setVideoEnded(true)}
-          src={videoData?.videoUrl}
-        >
-          <BigPlayButton position="center" />
-          {/* Render When Video Ends */}
-          {videoEnded && (
-            <div
-              style={{
-                backgroundImage:
-                  "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
-              }}
-              className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
-            >
+return (
+  <div className="flex flex-col gap-5 text-white">
+    {!videoData ? (
+      <img
+        src={previewSource}
+        alt="Preview"
+        className="h-full w-full rounded-md object-cover"
+      />
+      //pdf
+    ) : isPdf ? (
+        <Worker workerUrl={`https://unpkg.com/pdfjs-dist@2.7.570/build/pdf.worker.min.js`}>
+          <div style={{ height: '750px' }}>
+            <Viewer src={videoData?.pdfUrl} plugins={[defaultLayoutPluginInstance]} />
+          </div>
+        </Worker>
+    ) : (
+      <Player
+        ref={playerRef}
+        aspectRatio="16:9"
+        playsInline
+        onEnded={() => setVideoEnded(true)}
+        src={videoData?.videoUrl}
+      >
+        <BigPlayButton position="center" />
+        {/* Render When Video Ends */}
+        {videoEnded && (
+          <div
+            style={{
+              backgroundImage:
+                "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
+            }}
+            className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
+          >
               {!completedLectures.includes(subSectionId) && (
                 <IconBtn
                   disabled={loading}
@@ -238,6 +268,13 @@ const VideoDetails = () => {
           )}
         </Player>
       )}
+
+
+{/* {pdfUrl && (
+        <div className="mt-4">
+          <Viewer fileUrl={pdfUrl} plugins={[defaultLayoutPluginInstance]} />
+        </div>
+      )} */}
 
       <h1 className="mt-4 text-3xl font-semibold">{videoData?.title}</h1>
       <p className="pt-2 pb-6">{videoData?.description}</p>
