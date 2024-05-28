@@ -37,7 +37,7 @@ const router = express.Router()
 const {
     createRating,
     getAverageRating,
-    getAllRating,
+    getAllRatingReview,
   } = require("../controllers/RatingAndReview")
 
   //courseprogress controller importing
@@ -100,7 +100,7 @@ router.post("/getCategoryPageDetails", categoryPageDetails)
 //for RATING AND REVIEW
 router.post("/createRating",auth,isStudent,createRating)
 router.get("/getAverageRating",getAverageRating)
-router.get("/getReviews",getAllRating)
+router.get("/getReviews",getAllRatingReview)
 
 
 module.exports=router;
