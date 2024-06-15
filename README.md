@@ -2,7 +2,7 @@
 
 This project was Setup with Tailwind CSS.
 
-### `PROJECT SUMMERY`
+### `PROJECT SUMMARY`
 
 Project Summary: Study-Notion Project
 
@@ -12,7 +12,7 @@ Project Summary: Study-Notion Project
 Front-End Technologies:
 
 - React: We chose React as our front-end framework due to its component-based architecture, which enabled us to create reusable UI elements and efficiently manage state throughout the application.
-- CSS Styling: We used CSS to style the application, ensuring an attractive and intuitive user interface that aligns with the Book My Show brand.
+- CSS Styling: We used CSS to style the application, ensuring an attractive and intuitive user interface that aligns with the Dashboard.
 - React Hooks: Leveraging React Hooks allowed us to manage state and perform side effects, such as API calls, within functional components.
 
 Back-End Technologies:
@@ -50,8 +50,8 @@ Overall, we successfully implemented a educational web-page that allows users to
 
 ### `LINKS`
 
-1. Deployed Link --> /(Render)
-2. Live Server LInk -->
+1. Deployed Link -->https://studymania-deploy.onrender.com/ /(Render)
+2. Live Server LInk -->https://studymania-deploy-git-main-priyanshushekhar77s-projects.vercel.app/
 
 ## Available Scripts
 
@@ -60,7 +60,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:7000](http://localhost:7000) to view it in your browser.
+Open [http://localhost:7000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
